@@ -54,6 +54,10 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    def koinVersion = '2.1.0-alpha-10'
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
     //// endregion
 
     //// region UI
