@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Beer</string>
+
+    <string name="details_website">Strona:</string>
+    <string name="details_country">Kraj pochodzenia:</string>
+    <string name="details_alko_content">Zawartość Alkoholu:</string>
+    <string name="details_type">Type:</string>
 </resources>

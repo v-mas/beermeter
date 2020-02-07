@@ -31,6 +31,10 @@ class BeerListFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.beers.observe(viewLifecycleOwner, beerAdapter::submitList)
+    }
+
+    override fun onStart() {
+        super.onStart()
         viewModel.actionOpenBeerDetails.observeOn(AndroidSchedulers.mainThread()).subscribe {
             findNavController().navigate(BeerListFragmentDirections.navOpenBeerDetails(it))
         }.disposeWith(eventDisposables)

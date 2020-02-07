@@ -10,7 +10,11 @@
         android:label="ListFragment">
         <action
             android:id="@+id/nav_open_beerDetails"
-            app:destination="@id/nav_beer_details" />
+            app:destination="@id/nav_beer_details"
+            app:enterAnim="@anim/slide_enter_right"
+            app:exitAnim="@anim/slide_exit_left"
+            app:popEnterAnim="@anim/slide_pop_enter_left"
+            app:popExitAnim="@anim/slide_pop_exit_right" />
         <action
             android:id="@+id/nav_open_addBeer"
             app:destination="@id/nav_add_beer"

@@ -15,14 +15,16 @@ import com.github.vmas.beermeter.databinding.ItemBeerBinding
 class BeerAdapter(private val onItemSelected: (Beer) -> Unit) : ListAdapter<Beer, BeerAdapter.ViewHolder>(BeerDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent, onItemSelected)
+        return ViewHolder(parent).apply {
+            binding.onClick = onItemSelected
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(parent: ViewGroup, onItemSelected: (Beer) -> Unit) :
+    class ViewHolder(parent: ViewGroup) :
         BindingViewHolder<ItemBeerBinding>(
             ItemBeerBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -30,9 +32,6 @@ class BeerAdapter(private val onItemSelected: (Beer) -> Unit) : ListAdapter<Beer
                 false
             )
         ) {
-        init {
-            binding.onClick = onItemSelected
-        }
 
         fun bind(beer: Beer) {
             binding.beer = beer
@@ -40,7 +39,7 @@ class BeerAdapter(private val onItemSelected: (Beer) -> Unit) : ListAdapter<Beer
         }
     }
 
-    abstract class BindingViewHolder<T : ViewDataBinding>(protected val binding: T) :
+    abstract class BindingViewHolder<T : ViewDataBinding>(val binding: T) :
         RecyclerView.ViewHolder(binding.root)
 
     object BeerDiffer : DiffUtil.ItemCallback<Beer>() {

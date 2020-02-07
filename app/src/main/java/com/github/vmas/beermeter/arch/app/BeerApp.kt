@@ -38,7 +38,7 @@ class BeerApp : Application() {
 
                 override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                     return when (modelClass) {
-                        AddBeerViewModel::class.java -> AddBeerViewModel()
+                        AddBeerViewModel::class.java -> AddBeerViewModel(beerRepository)
                         BeerListViewModel::class.java -> BeerListViewModel(beerRepository)
                         BeerDetailsViewModel::class.java -> BeerDetailsViewModel(
                             BeerDetailsFragmentArgs.fromBundle(

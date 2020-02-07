@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,13 +10,211 @@
             type="com.github.vmas.beermeter.screen.beerdetails.BeerDetailsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <View
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#a7b8f9" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/content_start"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/margin_normal" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/content_end"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/margin_normal" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                app:imageUrl="@{viewmodel.beer.imgUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="#eee" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                android:text="@{viewmodel.beer.name}"
+                android:textSize="@dimen/textsize_h1"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/image"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                tools:text="Name" />
+
+            <View
+                android:id="@+id/details_name_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/image" />
+
+            <TextView
+                android:id="@+id/details_type_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_type"
+                android:textSize="@dimen/textsize_h2"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/details_type"
+                app:layout_constraintEnd_toStartOf="@id/details_type"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toTopOf="@id/details_type" />
+
+            <TextView
+                android:id="@+id/details_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@{viewmodel.beer.type}"
+                android:textSize="@dimen/textsize_h2"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_type_label"
+                app:layout_constraintTop_toBottomOf="@id/details_name_divider"
+                tools:text="Lager\njasny" />
+
+            <View
+                android:id="@+id/details_type_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/textsize_small"
+                android:background="@color/colorAccent"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_type" />
+
+            <TextView
+                android:id="@+id/details_alk_content_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_alko_content"
+                android:textSize="@dimen/textsize_h2"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/details_alk_content"
+                app:layout_constraintEnd_toStartOf="@id/details_alk_content"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toTopOf="@id/details_alk_content" />
+
+            <TextView
+                android:id="@+id/details_alk_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:textSize="@dimen/textsize_h2"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_alk_content_label"
+                app:layout_constraintTop_toBottomOf="@id/details_type_divider"
+                app:textPercentage="@{viewmodel.beer.percentage}"
+                tools:text="10%" />
+
+            <View
+                android:id="@+id/details_alk_content_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/textsize_small"
+                android:background="@color/colorAccent"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_alk_content" />
+
+            <TextView
+                android:id="@+id/details_country_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_country"
+                android:textSize="@dimen/textsize_h2"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/details_country"
+                app:layout_constraintEnd_toStartOf="@id/details_country"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toTopOf="@id/details_country" />
+
+            <TextView
+                android:id="@+id/details_country"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@{viewmodel.beer.country}"
+                android:textSize="@dimen/textsize_h2"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_country_label"
+                app:layout_constraintTop_toBottomOf="@id/details_alk_content_divider"
+                tools:text="Poland" />
+
+            <View
+                android:id="@+id/details_country_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/textsize_small"
+                android:background="@color/colorAccent"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_country" />
+
+            <TextView
+                android:id="@+id/details_website_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_website"
+                android:textSize="@dimen/textsize_h2"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/details_website"
+                app:layout_constraintEnd_toStartOf="@id/details_website"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toTopOf="@id/details_website" />
+
+            <TextView
+                android:id="@+id/details_website"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:text="@{viewmodel.beer.website}"
+                android:textSize="@dimen/textsize_h2"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_website_label"
+                app:layout_constraintTop_toBottomOf="@id/details_country_divider"
+                tools:text="https://github.com/v-mas" />
+
+            <View
+                android:id="@+id/details_website_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/textsize_small"
+                android:background="@color/colorAccent"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_website" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
