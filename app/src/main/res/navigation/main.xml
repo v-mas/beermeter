@@ -13,18 +13,35 @@
             app:destination="@id/nav_beer_details" />
         <action
             android:id="@+id/nav_open_addBeer"
-            app:destination="@id/nav_add_beer" />
+            app:destination="@id/nav_add_beer"
+            app:enterAnim="@anim/slide_enter_right"
+            app:exitAnim="@anim/slide_exit_left"
+            app:popEnterAnim="@anim/slide_pop_enter_left"
+            app:popExitAnim="@anim/slide_pop_exit_right" />
     </fragment>
     <fragment
         android:id="@+id/nav_beer_details"
         android:name="com.github.vmas.beermeter.screen.beerdetails.BeerDetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment">
+        <argument
+            android:name="beer"
+            app:argType="com.github.vmas.beermeter.core.model.Beer"
+            app:enterAnim="@anim/slide_enter_right"
+            app:exitAnim="@anim/slide_exit_left"
+            app:popEnterAnim="@anim/slide_pop_enter_left"
+            app:popExitAnim="@anim/slide_pop_exit_right" />
+    </fragment>
     <fragment
         android:id="@+id/nav_add_beer"
         android:name="com.github.vmas.beermeter.screen.addbeer.AddBeerFragment"
         android:label="AddBeerFragment">
         <action
             android:id="@+id/nav_open_beerDetails"
-            app:destination="@id/nav_beer_details" />
+            app:destination="@id/nav_beer_details"
+            app:enterAnim="@anim/slide_enter_right"
+            app:exitAnim="@anim/slide_exit_left"
+            app:popEnterAnim="@anim/slide_pop_enter_left"
+            app:popExitAnim="@anim/slide_pop_exit_right"
+            app:popUpTo="@id/nav_beer_list" />
     </fragment>
 </navigation>

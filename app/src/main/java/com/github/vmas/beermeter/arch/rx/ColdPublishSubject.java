@@ -11,7 +11,7 @@
  * the License for the specific language governing permissions and limitations under the License.
  */
 
-package com.github.vmas.beermeter.arch.util;
+package com.github.vmas.beermeter.arch.rx;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.CheckReturnValue;

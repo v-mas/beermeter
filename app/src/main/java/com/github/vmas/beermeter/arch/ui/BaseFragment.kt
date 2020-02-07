@@ -22,7 +22,7 @@ abstract class BaseFragment : Fragment() {
     protected lateinit var binding: ViewDataBinding
 
     protected inline fun <reified T : ViewModel> viewModel() =
-        viewModels<T>(factoryProducer = { dependencyContainer.viewModelFactory })
+        viewModels<T>(factoryProducer = { dependencyContainer.viewModelFactory(this) })
 
     protected val eventDisposables: DisposableContainer
         get() = disposables

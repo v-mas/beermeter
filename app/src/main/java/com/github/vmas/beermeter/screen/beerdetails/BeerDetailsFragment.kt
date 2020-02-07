@@ -10,7 +10,10 @@ import com.github.vmas.beermeter.databinding.FragmentBeerDetailsBinding
  * Created by Sławomir Golonka @ ConciseSoftware on 06-02-2020.
  */
 class BeerDetailsFragment : BaseFragment() {
+
     override val viewModel: BeerDetailsViewModel by viewModel()
+
     override fun createBinding(inflater: LayoutInflater, container: ViewGroup?): ViewDataBinding =
         FragmentBeerDetailsBinding.inflate(inflater, container, false)
+
 }

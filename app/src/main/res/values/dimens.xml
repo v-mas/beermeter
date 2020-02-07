@@ -4,4 +4,17 @@
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="margin_big">24dp</dimen>
     <dimen name="margin_huge">32dp</dimen>
+
+    <dimen name="textsize_tiny">12sp</dimen>
+    <dimen name="textsize_small">14sp</dimen>
+    <dimen name="textsize_normal">16sp</dimen>
+    <dimen name="textsize_big">20sp</dimen>
+    <dimen name="textsize_huge">24sp</dimen>
+
+    <dimen name="textsize_text">@dimen/textsize_normal</dimen>
+    <dimen name="textsize_description">@dimen/textsize_small</dimen>
+    <dimen name="textsize_h1">@dimen/textsize_huge</dimen>
+    <dimen name="textsize_h2">@dimen/textsize_big</dimen>
+
+    <dimen name="list_image_size">100dp</dimen>
 </resources>
