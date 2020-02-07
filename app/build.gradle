@@ -58,6 +58,7 @@ dependencies {
     def koinVersion = '2.1.0-alpha-10'
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-androidx-scope:$koinVersion"
+    implementation "org.koin:koin-android-viewmodel:$koinVersion"
     //// endregion
 
     //// region UI

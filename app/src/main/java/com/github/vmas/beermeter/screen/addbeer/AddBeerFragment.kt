@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import com.github.vmas.beermeter.arch.ui.BaseFragment
 import com.github.vmas.beermeter.databinding.FragmentAddBeerBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by Sławomir Golonka @ ConciseSoftware on 06-02-2020.

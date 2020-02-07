@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import com.github.vmas.beermeter.BR
-import com.github.vmas.beermeter.arch.di.dependencyContainer
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.internal.disposables.DisposableContainer
 
@@ -20,9 +18,6 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract val viewModel: ViewModel
     protected lateinit var binding: ViewDataBinding
-
-    protected inline fun <reified T : ViewModel> viewModel() =
-        viewModels<T>(factoryProducer = { dependencyContainer.viewModelFactory(this) })
 
     protected val eventDisposables: DisposableContainer
         get() = disposables

@@ -10,6 +10,7 @@ import com.github.vmas.beermeter.arch.rx.disposeWith
 import com.github.vmas.beermeter.arch.ui.BaseFragment
 import com.github.vmas.beermeter.databinding.FragmentBeerListBinding
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * Created by Sławomir Golonka @ ConciseSoftware on 06-02-2020.
