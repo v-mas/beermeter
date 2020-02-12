@@ -2,4 +2,8 @@
 <resources>
     <string name="acc__edit_beer">Edit this beer</string>
     <string name="acc__edit_photo">Change photo</string>
+    <string name="acc__edit_beer_name">Change beer name</string>
+    <string name="acc__edit_beer_type">Change beer type</string>
+    <string name="acc__edit_alcohol_content">Change alcohol content percentage</string>
+    <string name="acc__edit_website">Change website link to producers page</string>
 </resources>

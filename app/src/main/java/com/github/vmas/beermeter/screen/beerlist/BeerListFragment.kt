@@ -1,6 +1,5 @@
 package com.github.vmas.beermeter.screen.beerlist
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
@@ -28,13 +27,13 @@ class BeerListFragment : BaseFragment() {
             }
         }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun bindData() {
+        super.bindData()
         viewModel.beers.observe(viewLifecycleOwner, beerAdapter::submitList)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun bindEvents() {
+        super.bindEvents()
         viewModel.actionOpenBeerDetails.observeOn(AndroidSchedulers.mainThread()).subscribe {
             findNavController().navigate(BeerListFragmentDirections.navOpenBeerDetails(it))
         }.disposeWith(eventDisposables)

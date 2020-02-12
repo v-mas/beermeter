@@ -46,32 +46,53 @@
                 tools:src="#eee" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/details_name"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
                 android:text="@{viewmodel.beer.name}"
                 android:textSize="@dimen/textsize_h1"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/image"
+                app:layout_constraintEnd_toStartOf="@id/details_edit_name"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/content_start"
-                tools:text="Name" />
+                app:layout_constraintWidth_default="wrap"
+                tools:text="Name with very very very very long name" />
+
+            <ImageView
+                android:id="@+id/details_edit_name"
+                style="@style/Beer.Image.Edit"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:contentDescription="@string/acc__edit_beer_name"
+                android:onClick="@{() -> viewmodel.onEditNameClick()}"
+                app:layout_constraintBottom_toBottomOf="@id/details_name"
+                app:layout_constraintEnd_toStartOf="@id/details_edit_photo"
+                app:layout_constraintStart_toEndOf="@id/details_name" />
+
+            <ImageView
+                android:id="@+id/details_edit_photo"
+                style="@style/Beer.Image.Edit"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:contentDescription="@string/acc__edit_photo"
+                android:onClick="@{() -> viewmodel.onEditPhotoClick()}"
+                android:src="@drawable/ic_edit_photo_24"
+                app:layout_constraintBottom_toBottomOf="@id/image"
+                app:layout_constraintEnd_toEndOf="@id/content_end" />
 
             <View
                 android:id="@+id/details_name_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="@color/colorAccent"
+                style="@style/Beer.Divider.Horizontal"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toBottomOf="@id/image" />
 
             <TextView
                 android:id="@+id/details_type_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Beer.Text.Label"
                 android:text="@string/details_type"
-                android:textSize="@dimen/textsize_h2"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/details_type"
                 app:layout_constraintEnd_toStartOf="@id/details_type"
                 app:layout_constraintHorizontal_bias="0"
@@ -81,34 +102,40 @@
 
             <TextView
                 android:id="@+id/details_type"
+                style="@style/Beer.Text.Detail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/textsize_small"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@{viewmodel.beer.type}"
-                android:textSize="@dimen/textsize_h2"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintEnd_toStartOf="@id/details_type_edit"
                 app:layout_constraintStart_toEndOf="@id/details_type_label"
                 app:layout_constraintTop_toBottomOf="@id/details_name_divider"
                 tools:text="Lager\njasny" />
 
+            <ImageView
+                android:id="@+id/details_type_edit"
+                style="@style/Beer.Image.Edit"
+                android:layout_marginStart="@dimen/margin_small"
+                android:contentDescription="@string/acc__edit_beer_type"
+                android:onClick="@{() -> viewmodel.onEditTypeClick()}"
+                app:layout_constraintBottom_toBottomOf="@id/details_type"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_type"
+                app:layout_constraintTop_toTopOf="@id/details_type" />
+
             <View
                 android:id="@+id/details_type_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
+                style="@style/Beer.Divider.Horizontal"
                 android:layout_marginTop="@dimen/textsize_small"
-                android:background="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toBottomOf="@id/details_type" />
 
             <TextView
                 android:id="@+id/details_alk_content_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Beer.Text.Label"
                 android:text="@string/details_alko_content"
-                android:textSize="@dimen/textsize_h2"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/details_alk_content"
                 app:layout_constraintEnd_toStartOf="@id/details_alk_content"
                 app:layout_constraintHorizontal_bias="0"
@@ -118,34 +145,40 @@
 
             <TextView
                 android:id="@+id/details_alk_content"
+                style="@style/Beer.Text.Detail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/textsize_small"
                 android:layout_marginTop="@dimen/margin_normal"
-                android:textSize="@dimen/textsize_h2"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintEnd_toStartOf="@id/details_alk_content_edit"
                 app:layout_constraintStart_toEndOf="@id/details_alk_content_label"
                 app:layout_constraintTop_toBottomOf="@id/details_type_divider"
                 app:textPercentage="@{viewmodel.beer.percentage}"
                 tools:text="10%" />
 
+            <ImageView
+                android:id="@+id/details_alk_content_edit"
+                style="@style/Beer.Image.Edit"
+                android:layout_marginStart="@dimen/margin_small"
+                android:contentDescription="@string/acc__edit_alcohol_content"
+                android:onClick="@{() -> viewmodel.onEditAlcoholContentClick()}"
+                app:layout_constraintBottom_toBottomOf="@id/details_alk_content"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_alk_content"
+                app:layout_constraintTop_toTopOf="@id/details_alk_content" />
+
             <View
                 android:id="@+id/details_alk_content_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
+                style="@style/Beer.Divider.Horizontal"
                 android:layout_marginTop="@dimen/textsize_small"
-                android:background="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toBottomOf="@id/details_alk_content" />
 
             <TextView
                 android:id="@+id/details_country_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Beer.Text.Label"
                 android:text="@string/details_country"
-                android:textSize="@dimen/textsize_h2"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/details_country"
                 app:layout_constraintEnd_toStartOf="@id/details_country"
                 app:layout_constraintHorizontal_bias="0"
@@ -155,34 +188,50 @@
 
             <TextView
                 android:id="@+id/details_country"
+                style="@style/Beer.Text.Detail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/textsize_small"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:text="@{viewmodel.beer.country}"
-                android:textSize="@dimen/textsize_h2"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintEnd_toStartOf="@id/details_country_edit"
                 app:layout_constraintStart_toEndOf="@id/details_country_label"
                 app:layout_constraintTop_toBottomOf="@id/details_alk_content_divider"
                 tools:text="Poland" />
 
+            <ImageView
+                android:id="@+id/details_country_edit"
+                style="@style/Beer.Image.Edit"
+                android:layout_marginStart="@dimen/margin_small"
+                android:contentDescription="@string/acc__edit_country"
+                android:onClick="@{() -> viewmodel.onEditCountryClick()}"
+                app:layout_constraintBottom_toBottomOf="@id/details_country"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_country"
+                app:layout_constraintTop_toTopOf="@id/details_country" />
+
             <View
                 android:id="@+id/details_country_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
+                style="@style/Beer.Divider.Horizontal"
                 android:layout_marginTop="@dimen/textsize_small"
-                android:background="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toBottomOf="@id/details_country" />
 
+            <View
+                android:onClick="@{() -> viewmodel.onWebsiteClick()}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_country_divider"
+                app:layout_constraintBottom_toTopOf="@id/details_website_divider"
+                android:background="?selectableItemBackground" />
+
             <TextView
                 android:id="@+id/details_website_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Beer.Text.Label"
                 android:text="@string/details_website"
-                android:textSize="@dimen/textsize_h2"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/details_website"
                 app:layout_constraintEnd_toStartOf="@id/details_website"
                 app:layout_constraintHorizontal_bias="0"
@@ -192,65 +241,54 @@
 
             <TextView
                 android:id="@+id/details_website"
+                style="@style/Beer.Text.Detail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/textsize_small"
                 android:layout_marginTop="@dimen/margin_normal"
-                android:autoLink="web"
-                android:linksClickable="true"
                 android:text="@{viewmodel.beer.website}"
-                android:textSize="@dimen/textsize_h2"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintEnd_toStartOf="@id/details_website_edit"
                 app:layout_constraintStart_toEndOf="@id/details_website_label"
                 app:layout_constraintTop_toBottomOf="@id/details_country_divider"
                 tools:text="https://github.com/v-mas" />
 
+            <ImageView
+                android:id="@+id/details_website_edit"
+                style="@style/Beer.Image.Edit"
+                android:layout_marginStart="@dimen/margin_small"
+                android:contentDescription="@string/acc__edit_website"
+                android:onClick="@{() -> viewmodel.onEditWebsiteClick()}"
+                app:layout_constraintBottom_toBottomOf="@id/details_website"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_website"
+                app:layout_constraintTop_toTopOf="@id/details_website" />
+
             <View
                 android:id="@+id/details_website_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
+                style="@style/Beer.Divider.Horizontal"
                 android:layout_marginTop="@dimen/textsize_small"
-                android:background="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toBottomOf="@id/details_website" />
 
             <ImageView
                 android:id="@+id/details_edit_global"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/Beer.Image.Edit"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:activated="@{viewmodel.editEnabled}"
-                android:alpha="0.4"
-                android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/acc__edit_beer"
                 android:onClick="@{() -> viewmodel.onEditClick()}"
                 android:src="@drawable/ic_anim_edit_done_24"
-                android:tint="@android:color/darker_gray"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_edit_24" />
-
-            <ImageView
-                android:id="@+id/details_edit_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:alpha="0.3"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@string/acc__edit_photo"
-                android:onClick="@{() -> viewmodel.onEditPhotoClick()}"
-                android:src="@drawable/ic_edit_photo_24"
-                android:tint="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="@id/image"
-                app:layout_constraintEnd_toEndOf="@id/content_end" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/details_edit_group"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="@{viewmodel.editEnabled}"
-                app:constraint_referenced_ids="details_edit_photo"
+                app:constraint_referenced_ids="details_edit_photo,details_edit_name,details_type_edit,details_alk_content_edit,details_country_edit,details_website_edit"
                 tools:visibility="visible" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

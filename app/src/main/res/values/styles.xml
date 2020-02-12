@@ -1,10 +1,43 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
+    <style name="Beer" />
+
+    <style name="Beer.Divider">
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="Beer.Divider.Horizontal">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="Beer.Text">
+        <item name="android:textSize">@dimen/textsize_normal</item>
+    </style>
+
+    <style name="Beer.Text.Detail">
+        <item name="android:textSize">@dimen/textsize_h2</item>
+    </style>
+
+    <style name="Beer.Text.Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/textsize_h3</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Beer.Image" />
+
+    <style name="Beer.Image.Edit">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:alpha">0.3</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:minHeight">36dp</item>
+        <item name="android:minWidth">36dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:src">@drawable/ic_edit_24</item>
+        <item name="android:tint">@android:color/darker_gray</item>
     </style>
 
 </resources>

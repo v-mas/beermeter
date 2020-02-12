@@ -7,4 +7,5 @@
     <string name="details_type">Type:</string>
 
     <string name="error_beer_not_exist">Selected beer does not exist</string>
+    <string name="acc__edit_country">Change country of origin</string>
 </resources>

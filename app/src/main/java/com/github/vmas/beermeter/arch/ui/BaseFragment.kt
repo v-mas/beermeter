@@ -42,6 +42,13 @@ abstract class BaseFragment : Fragment() {
         return binding.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        bindData()
+    }
+
+    open fun bindData() {}
+
     override fun onStart() {
         super.onStart()
         if (disposables.isDisposed) {
@@ -58,7 +65,10 @@ abstract class BaseFragment : Fragment() {
                 }
             }.disposeWith(eventDisposables)
         }
+        bindEvents()
     }
+
+    open fun bindEvents() {}
 
     override fun onStop() {
         disposables.dispose()
