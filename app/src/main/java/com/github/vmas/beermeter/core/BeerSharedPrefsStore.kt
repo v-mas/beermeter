@@ -10,9 +10,18 @@ import com.google.gson.Gson
  */
 class BeerSharedPrefsStore(private val sharedPrefs: SharedPreferences, private val gson: Gson) : BeerStore {
 
-    override fun addBeer(beer: Beer) {
+    override fun addOrUpdateBeer(beer: Beer, name: String) {
         sharedPrefs.edit {
+            if (name != beer.name) {
+                remove(name)
+            }
             putString(beer.name, gson.toJson(beer))
+        }
+    }
+
+    override fun removeBeer(name: String) {
+        sharedPrefs.edit {
+            remove(name)
         }
     }
 
@@ -22,5 +31,9 @@ class BeerSharedPrefsStore(private val sharedPrefs: SharedPreferences, private v
 
     override fun getBeer(name: String): Beer? {
         return sharedPrefs.getString(name, null)?.let { gson.fromJson(it, Beer::class.java) }
+    }
+
+    override fun beerExists(name: String): Boolean {
+        return sharedPrefs.contains(name)
     }
 }

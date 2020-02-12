@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="acc__edit_beer">Edit this beer</string>
+    <string name="acc__edit_photo">Change photo</string>
+</resources>

@@ -10,7 +10,7 @@ class BeerVolatileStore : BeerStore {
     private val store = mutableMapOf<String, Beer>()
 
     init {
-        addBeer(
+        addOrUpdateBeer(
             Beer(
                 name = "Warka",
                 imgUrl = "https://grupazywiec.pl/wp-content/uploads/2016/03/2Warka_classic_butelka_packshot_2015_cream-1.png",
@@ -20,7 +20,7 @@ class BeerVolatileStore : BeerStore {
                 website = "https://grupazywiec.pl/marki/warka/"
             )
         )
-        addBeer(
+        addOrUpdateBeer(
             Beer(
                 name = "Tyskie",
                 imgUrl = "https://www.kp.pl/uploads/kp/beers2/Tyskie_gronie.png",
@@ -30,7 +30,7 @@ class BeerVolatileStore : BeerStore {
                 website = "https://www.tyskie.pl/piwa"
             )
         )
-        addBeer(
+        addOrUpdateBeer(
             Beer(
                 name = "Żywiec",
                 imgUrl = "https://grupazywiec.pl/wp-content/uploads/2016/02/Zywiec-Lager-butelka-500-ml-1.png",
@@ -40,7 +40,7 @@ class BeerVolatileStore : BeerStore {
                 website = "https://grupazywiec.pl/marki/zywiec/"
             )
         )
-        addBeer(
+        addOrUpdateBeer(
             Beer(
                 name = "EB",
                 imgUrl = "https://grupazywiec.pl/wp-content/uploads/2016/03/EB_butelka_500_prosta-1.png",
@@ -50,7 +50,7 @@ class BeerVolatileStore : BeerStore {
                 website = "https://grupazywiec.pl/marki/eb/"
             )
         )
-        addBeer(
+        addOrUpdateBeer(
             Beer(
                 name = "Heineken",
                 imgUrl = "https://www.heineken.com/pl/~/resources/Heineken/Poland/H4Poland/header_heineken.png",
@@ -60,7 +60,7 @@ class BeerVolatileStore : BeerStore {
                 website = "https://www.heineken.com/pl/we-are-heineken/our-beer"
             )
         )
-        addBeer(
+        addOrUpdateBeer(
             Beer(
                 name = "Carlsberg",
                 imgUrl = "https://carlsbergpolska.pl/media/6151/carlsberg_profil.png",
@@ -70,7 +70,7 @@ class BeerVolatileStore : BeerStore {
                 website = "https://carlsbergpolska.pl/products/carlsberg/carlsberg/?Ckey=13776"
             )
         )
-        addBeer(
+        addOrUpdateBeer(
             Beer(
                 name = "Guinness Draught",
                 imgUrl = "https://carlsbergpolska.pl/media/6174/guinness_44_cl.png",
@@ -82,8 +82,15 @@ class BeerVolatileStore : BeerStore {
         )
     }
 
-    override fun addBeer(beer: Beer) {
+    override fun addOrUpdateBeer(beer: Beer, name: String) {
+        if (name != beer.name) {
+            removeBeer(name)
+        }
         store[beer.name] = beer
+    }
+
+    override fun removeBeer(name: String) {
+        store.remove(name)
     }
 
     override fun getAll(): List<Beer> {
@@ -92,5 +99,9 @@ class BeerVolatileStore : BeerStore {
 
     override fun getBeer(name: String): Beer? {
         return store[name]
+    }
+
+    override fun beerExists(name: String): Boolean {
+        return store.containsKey(name)
     }
 }

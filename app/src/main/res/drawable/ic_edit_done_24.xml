@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/state_activated"
+        android:drawable="@drawable/ic_done_24"
+        android:state_activated="true"
+        android:state_enabled="true" />
+    <item
+        android:id="@+id/state_normal"
+        android:drawable="@drawable/ic_edit_24" />
+
+    <transition
+        android:drawable="@drawable/ic_anim_edit_done_24"
+        android:fromId="@id/state_normal"
+        android:reversible="true"
+        android:toId="@id/state_activated" />
+</animated-selector>

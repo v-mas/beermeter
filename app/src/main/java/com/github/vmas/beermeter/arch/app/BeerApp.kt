@@ -36,14 +36,16 @@ class BeerApp : Application() {
             object : ViewModelProvider.Factory {
                 private val fallbackFactory = ViewModelProvider.NewInstanceFactory()
 
-                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
+                override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     return when (modelClass) {
                         AddBeerViewModel::class.java -> AddBeerViewModel(beerRepository)
                         BeerListViewModel::class.java -> BeerListViewModel(beerRepository)
                         BeerDetailsViewModel::class.java -> BeerDetailsViewModel(
                             BeerDetailsFragmentArgs.fromBundle(
                                 fragment.arguments!!
-                            ).beer
+                            ).beer,
+                            beerRepository
                         )
                         else -> fallbackFactory.create(modelClass)
                     } as T

@@ -1,7 +1,6 @@
 package com.github.vmas.beermeter.screen.beerlist
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.vmas.beermeter.arch.rx.ColdPublishSubject
 import com.github.vmas.beermeter.core.BeerRepository
@@ -13,8 +12,7 @@ import io.reactivex.Observable
  */
 class BeerListViewModel(private val beerRepository: BeerRepository) : ViewModel() {
 
-    private val _beers = MutableLiveData<List<Beer>>(beerRepository.getAll())
-    val beers: LiveData<List<Beer>> get() = _beers
+    val beers: LiveData<List<Beer>> get() = beerRepository.getAll()
 
     private val _actionOpenBeerDetails = ColdPublishSubject.create<Beer>()
     val actionOpenBeerDetails: Observable<Beer> get() = _actionOpenBeerDetails

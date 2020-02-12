@@ -8,8 +8,12 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.github.vmas.beermeter.BR
 import com.github.vmas.beermeter.arch.di.dependencyContainer
+import com.github.vmas.beermeter.arch.rx.disposeWith
+import com.github.vmas.beermeter.core.error.Error
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.internal.disposables.DisposableContainer
 
@@ -43,10 +47,27 @@ abstract class BaseFragment : Fragment() {
         if (disposables.isDisposed) {
             disposables = CompositeDisposable()
         }
+        val viewModel = viewModel
+        if (viewModel is BaseViewModel) {
+            viewModel.navBackEvent.observeOn(AndroidSchedulers.mainThread()).subscribe {
+                //TODO show error dialog
+                try {
+                    findNavController().navigateUp()
+                } catch (e: IllegalStateException) {
+                    // nop. fragment is just not inside navigation graph
+                }
+            }.disposeWith(eventDisposables)
+        }
     }
 
     override fun onStop() {
         disposables.dispose()
         super.onStop()
     }
+
+    protected val Error.message
+        get() = when (this) {
+            is Error.Text -> this.message
+            is Error.Resource -> requireContext().getString(this.stringRes)
+        }
 }

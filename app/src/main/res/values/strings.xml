@@ -5,4 +5,6 @@
     <string name="details_country">Kraj pochodzenia:</string>
     <string name="details_alko_content">Zawartość Alkoholu:</string>
     <string name="details_type">Type:</string>
+
+    <string name="error_beer_not_exist">Selected beer does not exist</string>
 </resources>
