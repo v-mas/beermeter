@@ -225,7 +225,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/acc__edit_beer"
                 android:onClick="@{() -> viewmodel.onEditClick()}"
-                android:src="@drawable/ic_edit_done_24"
+                android:src="@drawable/ic_anim_edit_done_24"
                 android:tint="@android:color/darker_gray"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintTop_toTopOf="parent"

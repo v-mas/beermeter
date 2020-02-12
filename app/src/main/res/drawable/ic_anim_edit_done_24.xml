@@ -1,26 +1,44 @@
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
-    android:drawable="@drawable/ic_edit_24">
-    <target android:name="top">
-        <aapt:attr name="android:animation">
-            <objectAnimator
-                android:duration="@android:integer/config_shortAnimTime"
-                android:interpolator="@android:interpolator/fast_out_slow_in"
-                android:propertyName="pathData"
-                android:valueFrom="@string/path_ic_edit_24_top"
-                android:valueTo="@string/path_ic_done_24_top"
-                android:valueType="pathType" />
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <item
+        android:id="@+id/state_activated"
+        android:drawable="@drawable/ic_done_24"
+        android:state_activated="true"
+        android:state_enabled="true" />
+    <item
+        android:id="@+id/state_normal"
+        android:drawable="@drawable/ic_edit_24" />
+
+    <transition
+        android:fromId="@id/state_normal"
+        android:reversible="true"
+        android:toId="@id/state_activated">
+        <aapt:attr name="android:drawable">
+            <animated-vector android:drawable="@drawable/ic_edit_24">
+                <target android:name="top">
+                    <aapt:attr name="android:animation">
+                        <objectAnimator
+                            android:duration="@android:integer/config_shortAnimTime"
+                            android:interpolator="@android:interpolator/fast_out_slow_in"
+                            android:propertyName="pathData"
+                            android:valueFrom="@string/path_ic_edit_24_top"
+                            android:valueTo="@string/path_ic_done_24_top"
+                            android:valueType="pathType" />
+                    </aapt:attr>
+                </target>
+                <target android:name="body">
+                    <aapt:attr name="android:animation">
+                        <objectAnimator
+                            android:duration="@android:integer/config_shortAnimTime"
+                            android:interpolator="@android:interpolator/fast_out_slow_in"
+                            android:propertyName="pathData"
+                            android:valueFrom="@string/path_ic_edit_24_body"
+                            android:valueTo="@string/path_ic_done_24_body"
+                            android:valueType="pathType" />
+                    </aapt:attr>
+                </target>
+            </animated-vector>
         </aapt:attr>
-    </target>
-    <target android:name="body">
-        <aapt:attr name="android:animation">
-            <objectAnimator
-                android:duration="@android:integer/config_shortAnimTime"
-                android:interpolator="@android:interpolator/fast_out_slow_in"
-                android:propertyName="pathData"
-                android:valueFrom="@string/path_ic_edit_24_body"
-                android:valueTo="@string/path_ic_done_24_body"
-                android:valueType="pathType" />
-        </aapt:attr>
-    </target>
-</animated-vector>
+    </transition>
+</animated-selector>
