@@ -1,5 +1,6 @@
 package com.github.vmas.beermeter.screen
 
+import android.text.InputType
 import android.transition.Fade
 import android.transition.TransitionManager
 import android.view.View
@@ -68,3 +69,10 @@ var TextView.clickthrough: Boolean
             isLongClickable = true
         }
     }
+
+@BindingAdapter("forceImeAction")
+fun TextView.forceImeAction(force: Boolean = true) {
+    if (force) {
+        setRawInputType(InputType.TYPE_CLASS_TEXT)
+    }
+}
