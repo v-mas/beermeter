@@ -10,13 +10,25 @@ import com.github.vmas.beermeter.core.BeerRepository
 import com.github.vmas.beermeter.core.error.Error
 import com.github.vmas.beermeter.core.model.Beer
 import io.reactivex.Observable
+import java.math.BigDecimal
 
 /**
  * Created by Sławomir Golonka @ ConciseSoftware on 06-02-2020.
  */
 class BeerDetailsViewModel(private val beerArg: Beer, private val beerRepository: BeerRepository) : BaseViewModel() {
 
-    val beer: LiveData<Beer>
+    private val _beer: MutableLiveData<Beer>
+    val beer: LiveData<Beer> get() = _beer
+
+    init {
+        val ld = beerRepository.getBeer(beerArg.name)
+        if (ld == null) {
+            _beer = MutableLiveData()
+            _navBack.onNext(Error.Resource(R.string.error_beer_not_exist))
+        } else {
+            _beer = ld
+        }
+    }
 
     private val _editEnabled = MutableLiveData<Boolean>(false)
     val editEnabled: LiveData<Boolean> get() = _editEnabled
@@ -24,15 +36,11 @@ class BeerDetailsViewModel(private val beerArg: Beer, private val beerRepository
     private val _eventOpenBrowser = ColdPublishSubject.create<String>()
     val eventOpenBrowser: Observable<String> get() = _eventOpenBrowser
 
-    init {
-        val ld = beerRepository.getBeer(beerArg.name)
-        if (ld == null) {
-            beer = MutableLiveData()
-            _navBack.onNext(Error.Resource(R.string.error_beer_not_exist))
-        } else {
-            beer = ld
-        }
-    }
+    val name = MutableLiveData<String>(beer.value?.name ?: "")
+    val type = MutableLiveData<String>(beer.value?.type ?: "")
+    val alcoholContent = MutableLiveData<BigDecimal>(beer.value?.percentage ?: BigDecimal.ZERO)
+    val country = MutableLiveData<String>(beer.value?.country ?: "")
+    val website = MutableLiveData<String>(beer.value?.website ?: "")
 
     fun onWebsiteClick() {
         val website = beer.value!!.website ?: return
@@ -40,31 +48,20 @@ class BeerDetailsViewModel(private val beerArg: Beer, private val beerRepository
     }
 
     fun onEditClick() {
+        if (editEnabled.value!!) {
+            _beer.value = _beer.value!!.copy(
+                name = name.value!!,
+                type = type.value!!,
+                percentage = alcoholContent.value!!,
+//                imgUrl =
+                country = country.value!!,
+                website = website.value!!
+            )
+        }
         _editEnabled.toggle()
     }
 
     fun onEditPhotoClick() {
 
     }
-
-    fun onEditNameClick() {
-
-    }
-
-    fun onEditTypeClick() {
-
-    }
-
-    fun onEditAlcoholContentClick() {
-
-    }
-
-    fun onEditCountryClick() {
-
-    }
-
-    fun onEditWebsiteClick() {
-
-    }
 }
-

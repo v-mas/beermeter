@@ -1,6 +1,7 @@
 package com.github.vmas.beermeter.core
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.github.vmas.beermeter.core.model.Beer
 
 /**
@@ -8,9 +9,8 @@ import com.github.vmas.beermeter.core.model.Beer
  */
 interface BeerRepository {
     fun addBeer(beer: Beer)
-    fun updateBeer(beer: Beer)
     fun removeBeer(beer: Beer)
     fun getAll(): LiveData<List<Beer>>
-    fun getBeer(name: String): LiveData<Beer>?
+    fun getBeer(name: String): MutableLiveData<Beer>?
     fun changeBeerName(oldName: String, newName: String)
 }

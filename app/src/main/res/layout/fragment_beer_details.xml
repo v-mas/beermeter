@@ -12,8 +12,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,6 +32,7 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="@dimen/margin_normal" />
 
+            <!-- region -Header- -->
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
@@ -45,232 +45,26 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="#eee" />
 
-            <TextView
+            <EditText
                 android:id="@+id/details_name"
+                style="@style/Beer.Text.Header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
                 android:layout_marginBottom="@dimen/margin_normal"
-                android:text="@{viewmodel.beer.name}"
-                android:textSize="@dimen/textsize_h1"
-                android:textStyle="bold"
+                android:enabled="@{viewmodel.editEnabled}"
+                android:hint="@string/details_name"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:text="@={viewmodel.name}"
                 app:layout_constraintBottom_toBottomOf="@id/image"
-                app:layout_constraintEnd_toStartOf="@id/details_edit_name"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintWidth_default="wrap"
-                tools:text="Name with very very very very long name" />
+                app:layout_constraintEnd_toStartOf="@+id/content_end"
+                app:layout_constraintStart_toEndOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_edit_global"
+                app:layout_constraintVertical_bias="1"
+                tools:text="Name with long long long long long long long long name" />
 
-            <ImageView
-                android:id="@+id/details_edit_name"
-                style="@style/Beer.Image.Edit"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_small"
-                android:contentDescription="@string/acc__edit_beer_name"
-                android:onClick="@{() -> viewmodel.onEditNameClick()}"
-                app:layout_constraintBottom_toBottomOf="@id/details_name"
-                app:layout_constraintEnd_toStartOf="@id/details_edit_photo"
-                app:layout_constraintStart_toEndOf="@id/details_name" />
-
-            <ImageView
-                android:id="@+id/details_edit_photo"
-                style="@style/Beer.Image.Edit"
-                android:layout_marginBottom="@dimen/margin_normal"
-                android:contentDescription="@string/acc__edit_photo"
-                android:onClick="@{() -> viewmodel.onEditPhotoClick()}"
-                android:src="@drawable/ic_edit_photo_24"
-                app:layout_constraintBottom_toBottomOf="@id/image"
-                app:layout_constraintEnd_toEndOf="@id/content_end" />
-
-            <View
-                android:id="@+id/details_name_divider"
-                style="@style/Beer.Divider.Horizontal"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toBottomOf="@id/image" />
-
-            <TextView
-                android:id="@+id/details_type_label"
-                style="@style/Beer.Text.Label"
-                android:text="@string/details_type"
-                app:layout_constraintBottom_toBottomOf="@id/details_type"
-                app:layout_constraintEnd_toStartOf="@id/details_type"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toTopOf="@id/details_type" />
-
-            <TextView
-                android:id="@+id/details_type"
-                style="@style/Beer.Text.Detail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/textsize_small"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:text="@{viewmodel.beer.type}"
-                app:layout_constraintEnd_toStartOf="@id/details_type_edit"
-                app:layout_constraintStart_toEndOf="@id/details_type_label"
-                app:layout_constraintTop_toBottomOf="@id/details_name_divider"
-                tools:text="Lager\njasny" />
-
-            <ImageView
-                android:id="@+id/details_type_edit"
-                style="@style/Beer.Image.Edit"
-                android:layout_marginStart="@dimen/margin_small"
-                android:contentDescription="@string/acc__edit_beer_type"
-                android:onClick="@{() -> viewmodel.onEditTypeClick()}"
-                app:layout_constraintBottom_toBottomOf="@id/details_type"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toEndOf="@id/details_type"
-                app:layout_constraintTop_toTopOf="@id/details_type" />
-
-            <View
-                android:id="@+id/details_type_divider"
-                style="@style/Beer.Divider.Horizontal"
-                android:layout_marginTop="@dimen/textsize_small"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toBottomOf="@id/details_type" />
-
-            <TextView
-                android:id="@+id/details_alk_content_label"
-                style="@style/Beer.Text.Label"
-                android:text="@string/details_alko_content"
-                app:layout_constraintBottom_toBottomOf="@id/details_alk_content"
-                app:layout_constraintEnd_toStartOf="@id/details_alk_content"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toTopOf="@id/details_alk_content" />
-
-            <TextView
-                android:id="@+id/details_alk_content"
-                style="@style/Beer.Text.Detail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/textsize_small"
-                android:layout_marginTop="@dimen/margin_normal"
-                app:layout_constraintEnd_toStartOf="@id/details_alk_content_edit"
-                app:layout_constraintStart_toEndOf="@id/details_alk_content_label"
-                app:layout_constraintTop_toBottomOf="@id/details_type_divider"
-                app:textPercentage="@{viewmodel.beer.percentage}"
-                tools:text="10%" />
-
-            <ImageView
-                android:id="@+id/details_alk_content_edit"
-                style="@style/Beer.Image.Edit"
-                android:layout_marginStart="@dimen/margin_small"
-                android:contentDescription="@string/acc__edit_alcohol_content"
-                android:onClick="@{() -> viewmodel.onEditAlcoholContentClick()}"
-                app:layout_constraintBottom_toBottomOf="@id/details_alk_content"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toEndOf="@id/details_alk_content"
-                app:layout_constraintTop_toTopOf="@id/details_alk_content" />
-
-            <View
-                android:id="@+id/details_alk_content_divider"
-                style="@style/Beer.Divider.Horizontal"
-                android:layout_marginTop="@dimen/textsize_small"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toBottomOf="@id/details_alk_content" />
-
-            <TextView
-                android:id="@+id/details_country_label"
-                style="@style/Beer.Text.Label"
-                android:text="@string/details_country"
-                app:layout_constraintBottom_toBottomOf="@id/details_country"
-                app:layout_constraintEnd_toStartOf="@id/details_country"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toTopOf="@id/details_country" />
-
-            <TextView
-                android:id="@+id/details_country"
-                style="@style/Beer.Text.Detail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/textsize_small"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:text="@{viewmodel.beer.country}"
-                app:layout_constraintEnd_toStartOf="@id/details_country_edit"
-                app:layout_constraintStart_toEndOf="@id/details_country_label"
-                app:layout_constraintTop_toBottomOf="@id/details_alk_content_divider"
-                tools:text="Poland" />
-
-            <ImageView
-                android:id="@+id/details_country_edit"
-                style="@style/Beer.Image.Edit"
-                android:layout_marginStart="@dimen/margin_small"
-                android:contentDescription="@string/acc__edit_country"
-                android:onClick="@{() -> viewmodel.onEditCountryClick()}"
-                app:layout_constraintBottom_toBottomOf="@id/details_country"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toEndOf="@id/details_country"
-                app:layout_constraintTop_toTopOf="@id/details_country" />
-
-            <View
-                android:id="@+id/details_country_divider"
-                style="@style/Beer.Divider.Horizontal"
-                android:layout_marginTop="@dimen/textsize_small"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toBottomOf="@id/details_country" />
-
-            <View
-                android:onClick="@{() -> viewmodel.onWebsiteClick()}"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/details_country_divider"
-                app:layout_constraintBottom_toTopOf="@id/details_website_divider"
-                android:background="?selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/details_website_label"
-                style="@style/Beer.Text.Label"
-                android:text="@string/details_website"
-                app:layout_constraintBottom_toBottomOf="@id/details_website"
-                app:layout_constraintEnd_toStartOf="@id/details_website"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toTopOf="@id/details_website" />
-
-            <TextView
-                android:id="@+id/details_website"
-                style="@style/Beer.Text.Detail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/textsize_small"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:text="@{viewmodel.beer.website}"
-                app:layout_constraintEnd_toStartOf="@id/details_website_edit"
-                app:layout_constraintStart_toEndOf="@id/details_website_label"
-                app:layout_constraintTop_toBottomOf="@id/details_country_divider"
-                tools:text="https://github.com/v-mas" />
-
-            <ImageView
-                android:id="@+id/details_website_edit"
-                style="@style/Beer.Image.Edit"
-                android:layout_marginStart="@dimen/margin_small"
-                android:contentDescription="@string/acc__edit_website"
-                android:onClick="@{() -> viewmodel.onEditWebsiteClick()}"
-                app:layout_constraintBottom_toBottomOf="@id/details_website"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toEndOf="@id/details_website"
-                app:layout_constraintTop_toTopOf="@id/details_website" />
-
-            <View
-                android:id="@+id/details_website_divider"
-                style="@style/Beer.Divider.Horizontal"
-                android:layout_marginTop="@dimen/textsize_small"
-                app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toBottomOf="@id/details_website" />
-
+            <!--suppress AndroidUnknownAttribute -->
             <ImageView
                 android:id="@+id/details_edit_global"
                 style="@style/Beer.Image.Edit"
@@ -280,16 +74,180 @@
                 android:onClick="@{() -> viewmodel.onEditClick()}"
                 android:src="@drawable/ic_anim_edit_done_24"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_edit_24" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/details_edit_group"
+            <ImageView
+                android:id="@+id/details_edit_photo"
+                style="@style/Beer.Image.Edit"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:contentDescription="@string/acc__edit_photo"
+                android:onClick="@{() -> viewmodel.onEditPhotoClick()}"
+                android:src="@drawable/ic_edit_photo_24"
+                android:visibility="@{viewmodel.editEnabled}"
+                app:layout_constraintEnd_toStartOf="@+id/details_edit_global"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/details_name_divider"
+                style="@style/Beer.Divider.Horizontal"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/image" />
+            <!-- endregion -->
+
+            <!-- region Type -->
+            <TextView
+                android:id="@+id/details_type_label"
+                style="@style/Beer.Text.Label"
+                android:labelFor="@id/details_type"
+                android:text="@string/details_type"
+                app:layout_constraintBaseline_toBaselineOf="@id/details_type"
+                app:layout_constraintEnd_toStartOf="@id/details_type"
+                app:layout_constraintStart_toStartOf="@id/content_start" />
+
+            <EditText
+                android:id="@+id/details_type"
+                style="@style/Beer.Text.Detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:enabled="@{viewmodel.editEnabled}"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:text="@={viewmodel.type}"
+                app:layout_constraintEnd_toStartOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_type_label"
+                app:layout_constraintTop_toBottomOf="@id/details_name_divider"
+                tools:text="Lager jasny" />
+
+            <View
+                android:id="@+id/details_type_divider"
+                style="@style/Beer.Divider.Horizontal"
+                android:layout_marginTop="@dimen/textsize_small"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_type" />
+            <!-- endregion -->
+
+            <!-- region Alcohol content -->
+            <TextView
+                android:id="@+id/details_alk_content_label"
+                style="@style/Beer.Text.Label"
+                android:labelFor="@id/details_alk_content"
+                android:text="@string/details_alko_content"
+                app:layout_constraintBaseline_toBaselineOf="@id/details_alk_content"
+                app:layout_constraintEnd_toStartOf="@id/details_alk_content"
+                app:layout_constraintStart_toStartOf="@id/content_start" />
+
+            <EditText
+                android:id="@+id/details_alk_content"
+                style="@style/Beer.Text.Detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:enabled="@{viewmodel.editEnabled}"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:text="@={viewmodel.alcoholContent}"
+                app:layout_constraintEnd_toStartOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_alk_content_label"
+                app:layout_constraintTop_toBottomOf="@id/details_type_divider"
+                tools:text="10%" />
+
+            <View
+                android:id="@+id/details_alk_content_divider"
+                style="@style/Beer.Divider.Horizontal"
+                android:layout_marginTop="@dimen/textsize_small"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_alk_content" />
+            <!-- endregion -->
+
+            <!-- region Country -->
+            <TextView
+                android:id="@+id/details_country_label"
+                style="@style/Beer.Text.Label"
+                android:labelFor="@id/details_country"
+                android:text="@string/details_country"
+                app:layout_constraintBaseline_toBaselineOf="@id/details_country"
+                app:layout_constraintEnd_toStartOf="@id/details_country"
+                app:layout_constraintStart_toStartOf="@id/content_start" />
+
+            <EditText
+                android:id="@+id/details_country"
+                style="@style/Beer.Text.Detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:enabled="@{viewmodel.editEnabled}"
+                android:importantForAutofill="no"
+                android:inputType="textAutoComplete|textMultiLine"
+                android:text="@={viewmodel.country}"
+                app:layout_constraintEnd_toStartOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_country_label"
+                app:layout_constraintTop_toBottomOf="@id/details_alk_content_divider"
+                tools:text="Poland" />
+
+            <View
+                android:id="@+id/details_country_divider"
+                style="@style/Beer.Divider.Horizontal"
+                android:layout_marginTop="@dimen/textsize_small"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_country" />
+            <!-- endregion -->
+
+            <!-- region Website -->
+            <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:visibility="@{viewmodel.editEnabled}"
-                app:constraint_referenced_ids="details_edit_photo,details_edit_name,details_type_edit,details_alk_content_edit,details_country_edit,details_website_edit"
-                tools:visibility="visible" />
+                android:background="?selectableItemBackground"
+                android:enabled="@{!viewmodel.editEnabled}"
+                android:onClick="@{() -> viewmodel.onWebsiteClick()}"
+                app:layout_constraintBottom_toTopOf="@id/details_website_divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_country_divider" />
+
+            <TextView
+                android:id="@+id/details_website_label"
+                style="@style/Beer.Text.Label"
+                android:labelFor="@id/details_website"
+                android:text="@string/details_website"
+                app:layout_constraintBaseline_toBaselineOf="@id/details_website"
+                app:layout_constraintEnd_toStartOf="@id/details_website"
+                app:layout_constraintStart_toStartOf="@id/content_start" />
+
+            <EditText
+                android:id="@+id/details_website"
+                style="@style/Beer.Text.Detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/textsize_small"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:text="@={viewmodel.website}"
+                app:clickthrough="@{!viewmodel.editEnabled}"
+                app:layout_constraintEnd_toStartOf="@id/content_end"
+                app:layout_constraintStart_toEndOf="@id/details_website_label"
+                app:layout_constraintTop_toBottomOf="@id/details_country_divider"
+                tools:text="https://github.com/v-mas" />
+
+            <!-- TODO check if possible to start chrome tab with action get url -->
+
+            <View
+                android:id="@+id/details_website_divider"
+                style="@style/Beer.Divider.Horizontal"
+                android:layout_marginTop="@dimen/textsize_small"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/details_website" />
+            <!-- endregion -->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
