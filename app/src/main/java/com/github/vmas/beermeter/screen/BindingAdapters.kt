@@ -5,6 +5,7 @@ import android.transition.Fade
 import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -72,7 +73,7 @@ var TextView.clickthrough: Boolean
 
 @BindingAdapter("forceImeAction")
 fun TextView.forceImeAction(force: Boolean = true) {
-    if (force) {
-        setRawInputType(InputType.TYPE_CLASS_TEXT)
-    }
+    val done = nextFocusForwardId == View.NO_ID
+    imeOptions = if (done) EditorInfo.IME_ACTION_DONE else EditorInfo.IME_ACTION_NEXT
+    setRawInputType(inputType and (InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE).inv())
 }
